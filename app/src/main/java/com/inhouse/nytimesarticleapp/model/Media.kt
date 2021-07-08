@@ -1,0 +1,16 @@
+package com.inhouse.nytimesarticleapp.model
+
+import android.os.Parcelable
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+@JsonClass(generateAdapter = true)
+data class Media(
+    val type: String,
+    @Json(name = "subtype") val subType: String,
+    val caption: String,
+    val copyright: String,
+    @Json(name = "media-metadata") val mediaMetadataList: List<MediaMetadata>
+) : Parcelable
