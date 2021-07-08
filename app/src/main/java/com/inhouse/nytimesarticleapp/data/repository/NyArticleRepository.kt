@@ -9,8 +9,11 @@ import com.inhouse.nytimesarticleapp.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class NyArticleRepository(
+@Singleton
+class NyArticleRepository @Inject constructor(
     private val articleDao: ArticleDao,
     private val articleListApi: ArticleListApi
 ) : ArticleRepository {

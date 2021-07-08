@@ -7,9 +7,13 @@ import com.inhouse.nytimesarticleapp.model.MediaMetadata
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 @ProvidedTypeConverter
-class RoomConverters(val moshi: Moshi) {
+class RoomConverters @Inject constructor(val moshi: Moshi) {
     private fun <T> getAdapter(clazz: Class<T>): JsonAdapter<List<T>> {
         val listType = Types.newParameterizedType(List::class.java, clazz)
         return moshi.adapter(listType)
