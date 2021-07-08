@@ -33,6 +33,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    packagingOptions {
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+    }
 }
 
 dependencies {
@@ -52,6 +56,10 @@ dependencies {
     testImplementation "com.google.truth:truth:$version_truth"
     testImplementation "com.squareup.okhttp3:mockwebserver:$version_mockwebserver"
 
+    // Instrumented Unit Tests
+    androidTestImplementation "androidx.arch.core:core-testing:$version_core_test"
+    androidTestImplementation "com.google.truth:truth:$version_truth"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version_kotlinx_coroutines_test"
     androidTestImplementation "androidx.test.ext:junit:$version_androidx_junit_ext"
     androidTestImplementation "androidx.test.espresso:espresso-core:$version_espresso"
 
@@ -62,4 +70,9 @@ dependencies {
     // JSON parser
     implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$version_moshi"
+
+    // Room dependency
+    implementation "androidx.room:room-runtime:$version_room"
+    kapt "androidx.room:room-compiler:$version_room"
+    implementation "androidx.room:room-ktx:$version_room"
 }

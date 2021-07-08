@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface ArticleListApi {
     @GET("all-sections/{period}.json")
     suspend fun fetchArticles(
-        @Path("period") period: Int,
+        @Path("period") period: Int = 7, // weekly
         @Query("api-key") apiKey: String = ""
     ): Response<ArticleList>
 }
