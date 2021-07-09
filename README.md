@@ -8,6 +8,7 @@ It loads NyTimes most popular articles and then displays in a list.
 - Supports offline first architecture. 
 - Display the thumbnail in a circular layout
 - Loads details of article in a [WebView](https://developer.android.com/guide/webapps/webview)
+- Added search capability
 
 ***To Install and test latest v1.0 app follow below link***
 

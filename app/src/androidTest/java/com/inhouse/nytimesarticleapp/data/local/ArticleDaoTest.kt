@@ -41,7 +41,7 @@ class ArticleDaoTest {
 
         dao.insertArticleList(articleList)
 
-        val insertedArticles: List<Article> = dao.getAllArticles().getOrAwaitValue()
+        val insertedArticles: List<Article> = dao.getAllArticles("%%").getOrAwaitValue()
 
         Truth.assertThat(insertedArticles.first().id).isEqualTo(100000007779268)
     }
