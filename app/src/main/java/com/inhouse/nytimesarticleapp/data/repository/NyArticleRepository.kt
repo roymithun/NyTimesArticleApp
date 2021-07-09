@@ -40,5 +40,6 @@ class NyArticleRepository @Inject constructor(
         }
     }
 
-    override fun observableArticleList(): LiveData<List<Article>> = articleDao.getAllArticles()
+    override fun observableArticleList(filter: String): LiveData<List<Article>> =
+        articleDao.getAllArticles(filter)
 }

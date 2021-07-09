@@ -7,5 +7,5 @@ import com.inhouse.nytimesarticleapp.utils.Resource
 interface ArticleRepository {
     suspend fun fetchArticles(period: Int): Resource<List<Article>>
 
-    fun observableArticleList() : LiveData<List<Article>>
+    fun observableArticleList(filter:String) : LiveData<List<Article>>
 }

@@ -21,7 +21,7 @@ class ArticleListViewModel @Inject constructor(private val articleRepository: Ar
     private val _navigateToArticleDetail = MutableLiveData<Article?>()
     val navigateToArticleDetail: LiveData<Article?> = _navigateToArticleDetail
 
-    val articleList = articleRepository.observableArticleList()
+    fun articleList(filter: String = "%%") = articleRepository.observableArticleList(filter)
 
     init {
         getArticleList()
@@ -33,14 +33,13 @@ class ArticleListViewModel @Inject constructor(private val articleRepository: Ar
             _networkErrorState.postValue(
                 when (fetchArticles.status) {
                     Status.ERROR -> {
-                        articleList.value.isNullOrEmpty()
+                        articleList().value.isNullOrEmpty()
                     }
                     else -> false
                 }
             )
         }
     }
-
 
     fun refreshForInitialDataFetch() {
         getArticleList()

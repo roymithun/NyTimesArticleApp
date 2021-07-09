@@ -1,24 +1,32 @@
 package com.inhouse.nytimesarticleapp.ui.main
 
+import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.view.inputmethod.InputMethodManager
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.inhouse.nytimesarticleapp.R
 import com.inhouse.nytimesarticleapp.databinding.FragmentArticleListBinding
 import com.inhouse.nytimesarticleapp.model.Article
 import com.inhouse.nytimesarticleapp.ui.main.adapter.ArticleListAdapter
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class ArticleListFragment : Fragment() {
     lateinit var binding: FragmentArticleListBinding
     lateinit var articleListAdapter: ArticleListAdapter
     private val articleListViewModel: ArticleListViewModel by activityViewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,6 +66,41 @@ class ArticleListFragment : Fragment() {
                 articleListViewModel.resetNetworkErrorStatus()
             }
         }
+        articleListViewModel.articleList().observe(viewLifecycleOwner) {
+            articleListAdapter.submitList(it)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.options_menu, menu)
+        val searchView = SearchView(requireContext())
+        menu.findItem(R.id.search).apply {
+            setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW or MenuItem.SHOW_AS_ACTION_IF_ROOM)
+            actionView = searchView
+        }
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                var searchText = newText
+                searchText = "%$searchText%"
+                articleListViewModel.articleList(searchText)
+                    .observe(viewLifecycleOwner) {
+                        it?.let { articleListAdapter.submitList(it) }
+                    }
+                return false
+            }
+        })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        hideKeyboard()
     }
 
     private fun configureRecyclerView(recyclerView: RecyclerView) {
@@ -68,5 +111,11 @@ class ArticleListFragment : Fragment() {
         })
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = articleListAdapter
+    }
+
+    private fun hideKeyboard() {
+        val imm: InputMethodManager =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
     }
 }
