@@ -1,51 +1,38 @@
 package com.inhouse.nytimesarticleapp.data.local
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth
 import com.inhouse.nytimesarticleapp.model.Article
 import com.inhouse.nytimesarticleapp.model.Media
 import com.inhouse.nytimesarticleapp.model.MediaMetadata
 import com.inhouse.nytimesarticleapp.utils.getOrAwaitValue
-import com.squareup.moshi.Moshi
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-@RunWith(AndroidJUnit4::class)
 @SmallTest
+@HiltAndroidTest
 class ArticleDaoTest {
     @get:Rule
-    var instantTaskExecutorRule = InstantTaskExecutorRule()
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var database: ArticleDatabase
+    @get:Rule
+    val hiltRule = HiltAndroidRule(this)
+
+    @Inject
     lateinit var dao: ArticleDao
 
     @Before
     fun setUp() {
-        val roomConverter = RoomConverters(Moshi.Builder().build())
-        println("setup is called here")
-        database = Room.inMemoryDatabaseBuilder(
-            ApplicationProvider.getApplicationContext(),
-            ArticleDatabase::class.java
-        ).addTypeConverter(roomConverter)
-            .allowMainThreadQueries().build()
-
-        dao = database.articleDao()
-    }
-
-    @After
-    fun tearDown() {
-        println("tearDown is called here")
-        database.close()
+        hiltRule.inject()
     }
 
     @Test
