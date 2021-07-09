@@ -1,5 +1,6 @@
 package com.inhouse.nytimesarticleapp.ui.main.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -23,13 +24,17 @@ class ArticleListAdapter(private val clickListener: OnClickListener) :
                 val mediaMetadataList = mediaList[0].mediaMetadataList
                 if (mediaMetadataList.isNotEmpty()) {
                     val thumbnailImgUrl = mediaMetadataList[0].url
+                    Log.d("TAG", "thumbnailImgUrl $thumbnailImgUrl")
                     binding.ivThumbnail.load(thumbnailImgUrl) {
                         placeholder(R.drawable.loading_img)
                         error(R.drawable.ic_broken_image)
                         transformations(CircleCropTransformation())
                     }
                 }
+            } else {
+                binding.ivThumbnail.load(R.drawable.ic_broken_image)
             }
+            binding.tvDate.text = article.publishedDate
             binding.executePendingBindings()
         }
     }
