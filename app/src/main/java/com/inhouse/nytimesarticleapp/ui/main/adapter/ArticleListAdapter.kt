@@ -31,6 +31,7 @@ class ArticleListAdapter(private val clickListener: OnClickListener) :
                     }
                 }
             }
+            binding.executePendingBindings()
         }
     }
 
