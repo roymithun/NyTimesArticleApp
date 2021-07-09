@@ -9,6 +9,10 @@ It loads NyTimes most popular articles and then displays in a list.
 - Display the thumbnail in a circular layout
 - Loads details of article in a [WebView](https://developer.android.com/guide/webapps/webview)
 
+***To Install and test latest v1.0 app follow below link***
+
+[![NyTimes Article App](https://img.shields.io/badge/V1.0-Article%20App-green)](https://github.com/roymithun/NyTimesArticleApp/releases/download/v1.0/app-release.apk)
+
 ## Built With 🛠
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - For asynchronous programming.
