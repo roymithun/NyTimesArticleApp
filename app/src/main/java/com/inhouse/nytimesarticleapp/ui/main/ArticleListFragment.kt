@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.inhouse.nytimesarticleapp.databinding.FragmentArticleListBinding
@@ -35,12 +36,22 @@ class ArticleListFragment : Fragment() {
         binding.articleViewModel = articleListViewModel
         // configure recycler view
         configureRecyclerView(binding.rvArticleList)
+
+        // register observers
+        articleListViewModel.navigateToArticleDetail.observe(viewLifecycleOwner) {
+            it?.let {
+                findNavController().navigate(
+                    ArticleListFragmentDirections.actionArticleListFragmentToDetailFragment(it)
+                )
+                articleListViewModel.doneNavigationToDetail()
+            }
+        }
     }
 
     private fun configureRecyclerView(recyclerView: RecyclerView) {
         articleListAdapter = ArticleListAdapter(object : ArticleListAdapter.OnClickListener {
             override fun onClick(article: Article) {
-                TODO("Not yet implemented")
+                articleListViewModel.showArticleDetail(article)
             }
         })
         recyclerView.layoutManager = LinearLayoutManager(requireContext())

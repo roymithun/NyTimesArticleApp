@@ -21,6 +21,7 @@
         android:clipToPadding="true"
         app:cardCornerRadius="10dp"
         app:cardMaxElevation="5dp"
+        android:onClick="@{()->clickListener.onClick(article)}"
         app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,22 +29,14 @@
             android:layout_height="match_parent"
             android:padding="10dp">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_photo_container"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/iv_thumbnail"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                card_view:cardCornerRadius="25dp"
-                card_view:cardPreventCornerOverlap="false">
-
-                <ImageView
-                    android:id="@+id/iv_photo"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_launcher_background" />
-            </androidx.cardview.widget.CardView>
+                android:src="@drawable/loading_img" />
 
             <TextView
                 android:id="@+id/tv_title"
@@ -55,7 +48,7 @@
                 android:text="@{article.title}"
                 tools:text="Some dummy title"
                 app:layout_constraintEnd_toStartOf="@+id/iv_arrow"
-                app:layout_constraintStart_toEndOf="@+id/card_photo_container"
+                app:layout_constraintStart_toEndOf="@+id/iv_thumbnail"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -69,7 +62,7 @@
                 tools:text="Some dummy author"
                 android:textColor="@android:color/darker_gray"
                 app:layout_constraintEnd_toStartOf="@+id/iv_arrow"
-                app:layout_constraintStart_toEndOf="@+id/card_photo_container"
+                app:layout_constraintStart_toEndOf="@+id/iv_thumbnail"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
             <ImageView

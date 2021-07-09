@@ -1,10 +1,14 @@
 package com.inhouse.nytimesarticleapp.ui.main.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.transform.CircleCropTransformation
+import com.inhouse.nytimesarticleapp.R
 import com.inhouse.nytimesarticleapp.databinding.ListItemBinding
 import com.inhouse.nytimesarticleapp.model.Article
 
@@ -15,6 +19,18 @@ class ArticleListAdapter(private val clickListener: OnClickListener) :
         fun bind(article: Article, clickListener: OnClickListener) {
             binding.article = article
             binding.clickListener = clickListener
+            val mediaList = article.mediaList
+            if (mediaList.isNotEmpty()) {
+                val mediaMetadataList = mediaList[0].mediaMetadataList
+                if (mediaMetadataList.isNotEmpty()) {
+                    val thumbnailImgUrl = mediaMetadataList[0].url
+                    binding.ivThumbnail.load(thumbnailImgUrl) {
+                        placeholder(R.drawable.loading_img)
+                        error(R.drawable.ic_broken_image)
+                        transformations(CircleCropTransformation())
+                    }
+                }
+            }
         }
     }
 

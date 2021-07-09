@@ -18,6 +18,9 @@ class ArticleListViewModel @Inject constructor(private val articleRepository: Ar
     private val _networkErrorState = MutableLiveData<Boolean?>()
     val networkErrorState: LiveData<Boolean?> = _networkErrorState
 
+    private val _navigateToArticleDetail = MutableLiveData<Article?>()
+    val navigateToArticleDetail: LiveData<Article?> = _navigateToArticleDetail
+
     val articleList = articleRepository.observableArticleList()
 
     init {
@@ -40,5 +43,13 @@ class ArticleListViewModel @Inject constructor(private val articleRepository: Ar
 
     fun resetNetworkErrorStatus() {
         _networkErrorState.value = null
+    }
+
+    fun showArticleDetail(article: Article) {
+        _navigateToArticleDetail.value = article
+    }
+
+    fun doneNavigationToDetail() {
+        _navigateToArticleDetail.value = null
     }
 }

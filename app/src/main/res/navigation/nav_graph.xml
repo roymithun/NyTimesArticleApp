@@ -18,5 +18,9 @@
         android:id="@+id/articleDetailFragment"
         android:name="com.inhouse.nytimesarticleapp.ui.detail.ArticleDetailFragment"
         android:label="DetailFragment"
-        tools:layout="@layout/fragment_article_detail" />
+        tools:layout="@layout/fragment_article_detail">
+        <argument
+            android:name="selectedArticle"
+            app:argType="com.inhouse.nytimesarticleapp.model.Article" />
+    </fragment>
 </navigation>
