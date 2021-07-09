@@ -1,5 +1,8 @@
 # NyTimesArticleApp
 
+|<img width="250" alt="Screenshot_1625816165" src="https://user-images.githubusercontent.com/5355440/125041738-25501700-e0aa-11eb-81b7-6fb4f322075c.png">
+<img width="250" alt="Screenshot_1625816182" src="https://user-images.githubusercontent.com/5355440/125041754-2a14cb00-e0aa-11eb-949e-9dc4721d74aa.png">
+
 ## About
 It loads NyTimes most popular articles and then displays in a list.
 - Supports offline first architecture. 
@@ -21,3 +24,34 @@ It loads NyTimes most popular articles and then displays in a list.
 - [Moshi](https://github.com/square/moshi) - A modern JSON library for Kotlin and Java.
 - [Moshi Converter](https://github.com/square/retrofit/tree/master/retrofit-converters/moshi) - A Converter which uses Moshi for serialization to and from JSON.
 - [Coil-kt](https://coil-kt.github.io/coil/) - An image loading library for Android backed by Kotlin Coroutines.
+
+# Package Structure
+    
+    com.inhouse.nytimesarticleapp    # Root Package
+    .
+    ├── data                      # For data handling.
+    │   ├── local                 # Local Persistence Database. Room (SQLite) database
+    |   │   ├── dao               # Data Access Object for Room   
+    |   |   ├── database          # Room database
+    |   |   └── typeconverter     # Type converter
+    │   ├── remote                # Remote Data Handlers     
+    |   │   ├── api               # Retrofit API for remote end point.
+    │   └── repository            # Single source of data.
+    |
+    ├── model                     # Model classes acting as entities for Room
+    |
+    ├── di                        # Dependency Injection             
+    │   ├── datamodule            # dao provider
+    │   └── networkmodule         # network interface and moshi provider       
+    |
+    ├── ui                        # Activity/View layer
+    │   ├── mainactivity          # Base View
+    │   ├── main                  # Article List Screen & ViewModel
+    |   │   ├── adapter           # Adapter for RecyclerView
+    |   |   ├── di                # Dependency Injection in ui
+    |   |   |   └── articlemodule # ViewModelComponenet module
+    |   |   ├── fragment          # Article list Fragment
+    |   │   └── viewmodel         # ViewHolder for RecyclerView   
+    │   └── details               # Detail Screen Fragment
+    |
+    └── utils                     # Utility Classes / Kotlin extensions
