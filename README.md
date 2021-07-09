@@ -1,6 +1,6 @@
 # NyTimesArticleApp
 
-|<img width="250" alt="Screenshot_1625816165" src="https://user-images.githubusercontent.com/5355440/125041738-25501700-e0aa-11eb-81b7-6fb4f322075c.png">
+|<img width="250" alt="Screenshot_1625865314" src="https://user-images.githubusercontent.com/5355440/125136652-4ea98b00-e11c-11eb-950a-b1a01c6a14e9.png">
 <img width="250" alt="Screenshot_1625816182" src="https://user-images.githubusercontent.com/5355440/125041754-2a14cb00-e0aa-11eb-949e-9dc4721d74aa.png">
 
 ## About
@@ -13,6 +13,16 @@ It loads NyTimes most popular articles and then displays in a list.
 ***To Install and test latest v1.0 app follow below link***
 
 [![NyTimes Article App](https://img.shields.io/badge/V1.0-Article%20App-green)](https://github.com/roymithun/NyTimesArticleApp/releases/download/v1.0/app-release.apk)
+
+## Pre-requisites
+Most Popular API from [nytimes developer](https://developer.nytimes.com/apis) have been used.
+
+For example: https://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/7.json?api-key=yourkey
+
+Where your_key has to be generated following [get-started](https://developer.nytimes.com/get-started) page from nytimes.
+
+Once you have yourkey, please add a new entry in **local.properties** inside your project directory. Since local.properties is added in [.gitignore](https://github.com/roymithun/NyTimesArticleApp/blob/master/.gitignore). it is never added to VCS. This way your appKey can be kept somehow secured.
+- **appKey = your_key**
 
 ## Built With 🛠
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
