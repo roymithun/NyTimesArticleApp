@@ -46,6 +46,18 @@ class ArticleListFragment : Fragment() {
                 articleListViewModel.doneNavigationToDetail()
             }
         }
+        articleListViewModel.networkErrorState.observe(viewLifecycleOwner) {
+            it?.let {
+                if (it) {
+                    binding.rvArticleList.visibility = View.GONE
+                    binding.llNetworkError.visibility = View.VISIBLE
+                } else {
+                    binding.rvArticleList.visibility = View.VISIBLE
+                    binding.llNetworkError.visibility = View.GONE
+                }
+                articleListViewModel.resetNetworkErrorStatus()
+            }
+        }
     }
 
     private fun configureRecyclerView(recyclerView: RecyclerView) {

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NyTimesArticleApp</string>
+    <string name="network_error_occurred">Network error occurred</string>
+    <string name="retry">Retry</string>
 </resources>

@@ -41,6 +41,11 @@ class ArticleListViewModel @Inject constructor(private val articleRepository: Ar
         }
     }
 
+
+    fun refreshForInitialDataFetch() {
+        getArticleList()
+    }
+
     fun resetNetworkErrorStatus() {
         _networkErrorState.value = null
     }
