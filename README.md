@@ -55,3 +55,8 @@ It loads NyTimes most popular articles and then displays in a list.
     │   └── details               # Detail Screen Fragment
     |
     └── utils                     # Utility Classes / Kotlin extensions
+
+## Architecture
+This app uses [***MVVM (Model View View-Model)***](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) architecture.
+
+<img width="600" alt="final-mvvm-architecture" src="https://developer.android.com/topic/libraries/architecture/images/final-architecture.png">
