@@ -10,7 +10,7 @@ import com.inhouse.nytimesarticleapp.model.MediaMetadata
 @Database(
     version = 1,
     entities = [Article::class, Media::class, MediaMetadata::class],
-    exportSchema = false
+    exportSchema = true
 )
 @TypeConverters(RoomConverters::class)
 abstract class ArticleDatabase : RoomDatabase() {

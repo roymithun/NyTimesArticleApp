@@ -22,6 +22,17 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "com.inhouse.nytimesarticleapp.HiltTestRunner"
+
+        //        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+//            }
+//        }
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
     }
 
     buildTypes {
